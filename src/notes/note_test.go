@@ -46,7 +46,7 @@ func TestSave(t *testing.T) {
 
 func TestParse(t *testing.T) {
 	content := "test a new note with a single hashtag #test, without linebreaks etc."
-	tags := parse(content)
+	tags := parseTag(content)
 	if len(tags) != 1 {
 		t.Errorf("expected 1 tag, got %v", len(tags))
 	}
@@ -57,7 +57,7 @@ func TestParse(t *testing.T) {
 
 func getNoteWithTagAndSaveInManager(t *testing.T) (*NoteManager, *Note, string, []string) {
 	content := "test a new note with a single hashtag #test, without linebreaks etc."
-	tags := parse(content)
+	tags := parseTag(content)
 	note := newNoteOrFatal(t, content)
 	man := NewNoteManager()
 	man.Save(note)

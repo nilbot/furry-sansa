@@ -38,7 +38,7 @@ func NewNote(content string) (*Note, error) {
 	return result, nil
 }
 
-func parse(str string) []string {
+func parseTag(str string) []string {
 	if strings.ContainsRune(str, '#') {
 		str = strings.TrimSpace(str)
 		str = strings.Replace(str, ",", " ", -1)
@@ -60,7 +60,7 @@ func parse(str string) []string {
 
 func (man *NoteManager) Save(n *Note) error {
 	man.notes[n.ID] = n
-	t := parse(n.Content)
+	t := parseTag(n.Content)
 	for _, v := range t {
 		man.tags[v] = append(man.tags[v], n.ID)
 	}
