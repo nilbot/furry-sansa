@@ -1,4 +1,4 @@
-furry-sansa
+Random snippets
 ===========
 
-Code Snippets Stolen from Interwebz
+Random snippets
