@@ -85,3 +85,15 @@ func TestSaveWithVerifyingTag(t *testing.T) {
 		}
 	}
 }
+
+func TestGetNoteById(t *testing.T) {
+	man, note, content, _ := getNoteWithTagAndSaveInManager(t)
+	if n, ok := man.Find(note.ID); ok {
+		if n.Content != content {
+			t.Errorf("expected matching content, got %q", n.Content)
+		}
+	}
+	if _, ok := man.Find(note.ID); !ok {
+		t.Errorf("expected to find a matching, got nothing")
+	}
+}

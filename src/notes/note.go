@@ -91,3 +91,13 @@ func (man *NoteManager) NotesWith(tag string) ([]string, bool) {
 	value, ok := man.tags[tag]
 	return value, ok
 }
+
+func (man *NoteManager) Find(id string) (*Note, bool) {
+	ns := man.AllNotes()
+	for _, n := range ns {
+		if n.ID == id {
+			return n, true
+		}
+	}
+	return nil, false
+}
