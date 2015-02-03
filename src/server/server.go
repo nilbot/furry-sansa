@@ -74,7 +74,7 @@ func ListNotes(w http.ResponseWriter, r *http.Request) error {
 	return json.NewEncoder(w).Encode(res)
 }
 
-// NewTask handles POST requests on /note.
+// NewNote handles POST requests on /note.
 // The request body must contain a JSON object with a Content field.
 // The status code of the response is used to indicate any error.
 //
