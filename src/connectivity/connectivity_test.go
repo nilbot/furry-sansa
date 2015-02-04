@@ -139,3 +139,16 @@ func TestQueryComponent(t *testing.T) {
 		t.Errorf("expected component %v, got %v", nil, c.queryComponent(0))
 	}
 }
+
+// test constructor
+func TestConstructorNewConnectivity(t *testing.T) {
+	test := NewConnectivity(10)
+	expected := []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
+	index := 0
+	for index != len(test.elements) {
+		if expected[index] != test.elements[index] {
+			t.Errorf("expected %v, got %v", expected[index], test.elements[index])
+		}
+		index++
+	}
+}

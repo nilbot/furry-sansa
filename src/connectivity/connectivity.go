@@ -36,3 +36,25 @@ func (s *Components) queryComponent(q int) Component {
 	}
 	return nil
 }
+
+type Connectivity struct {
+	Size     int
+	elements []int
+	Components
+}
+
+// Construct a array of number 0...N-1
+func NewConnectivity(N int) *Connectivity {
+	result := &Connectivity{
+		Size: N,
+	}
+	items := make([]int, N)
+	components := make([]Component, N)
+	for index := 0; index != N; index++ {
+		items[index] = index
+		components[index] = []int{index}
+	}
+	result.elements = items
+	result.Components = components
+	return result
+}
