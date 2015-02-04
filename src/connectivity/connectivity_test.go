@@ -102,3 +102,40 @@ func TestFindQuery(t *testing.T) {
 		}
 	}
 }
+
+//helper func for checking 2 components
+func checkComponent(a, b Component) bool {
+	if a == nil && b == nil {
+		return true
+	}
+	if len(a) == len(b) {
+		index := 0
+		for index != len(a) {
+			if a[index] != b[index] {
+				return false
+			}
+			index++
+		}
+		return true
+	}
+	return false
+}
+
+// test helper func queryComponent
+func TestQueryComponent(t *testing.T) {
+	c := Components(getTestComponents())
+	if !checkComponent(c.queryComponent(1), c[1]) {
+		t.Errorf("expected component %v, got %v", c[1], c.queryComponent(1))
+	}
+	if !checkComponent(c.queryComponent(2), c[0]) {
+		t.Errorf("expected component %v, got %v", c[0], c.queryComponent(2))
+	}
+	if !checkComponent(c.queryComponent(5), c[2]) {
+		t.Errorf("expected component %v, got %v", c[2], c.queryComponent(5))
+	}
+	// not found digit should return nil instead of empty set, because it would
+	// mess with FindQuery
+	if !checkComponent(c.queryComponent(0), nil) {
+		t.Errorf("expected component %v, got %v", nil, c.queryComponent(0))
+	}
+}

@@ -25,3 +25,14 @@ func (s *Components) FindQuery(a, b int) bool {
 	}
 	return false
 }
+
+func (s *Components) queryComponent(q int) Component {
+	for _, c := range *s {
+		for _, d := range c {
+			if d == q {
+				return c
+			}
+		}
+	}
+	return nil
+}
