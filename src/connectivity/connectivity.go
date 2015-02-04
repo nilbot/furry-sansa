@@ -1,5 +1,6 @@
 package connectivity
 
+// naive findQuery, O(n) in single component
 func (s *Component) FindQueryInSingleSetNaive(a, b int) bool {
 	//naive
 	var first, second bool
@@ -17,6 +18,7 @@ func (s *Component) FindQueryInSingleSetNaive(a, b int) bool {
 type Component []int
 type Components []Component
 
+// return true if a and b are in the same component
 func (s *Components) FindQuery(a, b int) bool {
 	for _, c := range *s {
 		if c.FindQueryInSingleSetNaive(a, b) {
@@ -26,15 +28,17 @@ func (s *Components) FindQuery(a, b int) bool {
 	return false
 }
 
-func (s *Components) queryComponent(q int) Component {
-	for _, c := range *s {
+// return queried Component in which the q resides
+// and the index of q in the component
+func (s *Components) queryComponent(q int) (int, Component) {
+	for i, c := range *s {
 		for _, d := range c {
 			if d == q {
-				return c
+				return i, c
 			}
 		}
 	}
-	return nil
+	return -1, nil
 }
 
 type Connectivity struct {

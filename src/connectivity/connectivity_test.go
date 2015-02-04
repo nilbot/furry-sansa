@@ -1,6 +1,9 @@
 package connectivity
 
-import "testing"
+import (
+	"sort"
+	"testing"
+)
 
 // test set is a struct of set/bag of items, plus
 // the test subject -> 2 items
@@ -103,12 +106,16 @@ func TestFindQuery(t *testing.T) {
 	}
 }
 
-//helper func for checking 2 components
+// helper func for checking 2 components
+// components sorted to deliver the false negative result
+// as soon as possible
 func checkComponent(a, b Component) bool {
 	if a == nil && b == nil {
 		return true
 	}
 	if len(a) == len(b) {
+		sort.Ints(a)
+		sort.Ints(b)
 		index := 0
 		for index != len(a) {
 			if a[index] != b[index] {
@@ -124,19 +131,20 @@ func checkComponent(a, b Component) bool {
 // test helper func queryComponent
 func TestQueryComponent(t *testing.T) {
 	c := Components(getTestComponents())
-	if !checkComponent(c.queryComponent(1), c[1]) {
-		t.Errorf("expected component %v, got %v", c[1], c.queryComponent(1))
+
+	if _, got := c.queryComponent(1); !checkComponent(got, c[1]) {
+		t.Errorf("expected component %v, got %v", c[1], got)
 	}
-	if !checkComponent(c.queryComponent(2), c[0]) {
-		t.Errorf("expected component %v, got %v", c[0], c.queryComponent(2))
+	if _, got := c.queryComponent(2); !checkComponent(got, c[0]) {
+		t.Errorf("expected component %v, got %v", c[0], got)
 	}
-	if !checkComponent(c.queryComponent(5), c[2]) {
-		t.Errorf("expected component %v, got %v", c[2], c.queryComponent(5))
+	if _, got := c.queryComponent(5); !checkComponent(got, c[2]) {
+		t.Errorf("expected component %v, got %v", c[2], got)
 	}
 	// not found digit should return nil instead of empty set, because it would
 	// mess with FindQuery
-	if !checkComponent(c.queryComponent(0), nil) {
-		t.Errorf("expected component %v, got %v", nil, c.queryComponent(0))
+	if _, got := c.queryComponent(0); !checkComponent(got, nil) {
+		t.Errorf("expected component %v, got %v", nil, got)
 	}
 }
 
