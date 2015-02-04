@@ -160,3 +160,20 @@ func TestConstructorNewConnectivity(t *testing.T) {
 		index++
 	}
 }
+
+// test union
+func TestUnion(t *testing.T) {
+	components := Components(getTestComponents())
+	components.Union(1, 5)
+	if len(components) != 2 {
+		t.Errorf("expected reduced component of length %v, got %v", 2, len(components))
+	}
+
+	for _, c := range components {
+		if len(c) != 4 {
+			if b := checkComponent(c, []int{1, 4, 5, 8, 9}); !b {
+				t.Errorf("expected matched component %q, got %q", []int{1, 4, 5, 8, 9}, c)
+			}
+		}
+	}
+}

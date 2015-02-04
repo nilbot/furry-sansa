@@ -62,3 +62,15 @@ func NewConnectivity(N int) *Connectivity {
 	result.Components = components
 	return result
 }
+
+// union
+// reduce the []component dimension
+// and and merge the related 2 components
+func (c *Components) Union(a, b int) {
+	iA, _ := c.queryComponent(a)
+	iB, B := c.queryComponent(b)
+	(*c)[iA] = append((*c)[iA], B...)
+	copy((*c)[iB:], (*c)[iB+1:])
+	(*c)[len(*c)-1] = nil
+	*c = (*c)[:len(*c)-1]
+}
