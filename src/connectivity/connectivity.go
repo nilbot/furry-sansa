@@ -1,6 +1,6 @@
 package connectivity
 
-func FindQuery(a, b int, s *[]int) bool {
+func (s *Component) FindQueryInSingleSetNaive(a, b int) bool {
 	//naive
 	var first, second bool
 	for _, it := range *s {
@@ -12,4 +12,16 @@ func FindQuery(a, b int, s *[]int) bool {
 		}
 	}
 	return first && second
+}
+
+type Component []int
+type Components []Component
+
+func (s *Components) FindQuery(a, b int) bool {
+	for _, c := range *s {
+		if c.FindQueryInSingleSetNaive(a, b) {
+			return true
+		}
+	}
+	return false
 }
