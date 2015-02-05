@@ -162,6 +162,7 @@ func TestConstructorNewConnectivity(t *testing.T) {
 }
 
 // test union
+// todo: check if the Union skips cases where two numbers are already connected
 func TestUnion(t *testing.T) {
 	components := Components(getTestComponents())
 	components.Union(1, 5)
