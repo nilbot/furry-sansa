@@ -3,9 +3,9 @@ package server
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/nilbot/note.app/notes"
 	"log"
 	"net/http"
-	"notes"
 
 	"github.com/gorilla/mux"
 )
